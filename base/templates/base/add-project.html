@@ -1,0 +1,49 @@
+{% extends "_layouts/base.html" %}
+
+{% block css %}
+{{block.super}}
+<style>
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+</style>
+{% endblock css %}
+
+{% block page_title %}NEW PROJECT{% endblock %}
+{% block page_class %}home-page{% endblock %}
+{% block content %}
+<!-- jumbotron -->
+<div class="container">
+<div class="row">
+  <form action="" method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+      <div class="form-group">
+  	    <label for="project-name">Project Name:</label>
+  	    {{ form.name }}
+        {% if form.name.errors %}
+                        <span class="alert-error">{{ form.name.errors|striptags }}</span>
+                      {% endif %}
+
+      </div>
+      <div class="form-group">
+  	    <label for="Description">Description:</label>
+  	    {{ form.description }}
+        {% if form.description.errors %}
+                        <span class="alert-error">{{ form.description.errors|striptags }}</span>
+                      {% endif %}
+      </div>
+      <div class="form-group">
+  	    <label for="images">Images:</label>
+        {{ form.image }}
+        {% if form.image.errors %}
+                        <span class="alert-error">{{ form.image.errors|striptags }}</span>
+                      {% endif %}
+  	    
+      </div>
+      <input type="submit" value="Submit">
+  </form>
+</div>
+</div>
+{% endblock %}

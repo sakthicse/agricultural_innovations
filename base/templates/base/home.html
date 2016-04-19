@@ -1,0 +1,81 @@
+{% extends "_layouts/base.html" %}
+
+{% block css %}
+{{block.super}}
+<style>
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+</style>
+{% endblock css %}
+
+{% block page_title %}NEED FOR AGRICULTURAL INNVATIONS{% endblock %}
+{% block page_class %}home-page{% endblock %}
+{% block content %}
+<!-- This code is taken from http://getbootstrap.com/examples/jumbotron/ -->
+
+
+<div class="container">
+{% if success_message %}
+  <div class="alert-success">
+    Your Project post successfully!.
+  </div>
+{% endif %}
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-2">
+        <h4>Description about web site : </h4>
+        </div>
+        <div class="col-md-8">
+          <h4 class="description">{{siteinfo.description}}</h4>
+
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+          {% if projects %}
+            <table class="table">
+            {% for project in projects %}
+            <tr>
+            <td>
+            <div class="col-md-2">
+            <a href="{% url 'project_view' project.id %}"><h4>{{project.name}}</h4></a>
+            </div>
+            </td>
+            <div class="col-md-8">
+            <td>
+
+            Posted by :<b> {{project.created_by.username}}</b>
+            </td>
+            <td>
+            Posted at : <b>{{project.created_at}}</b>
+            </td>
+            </div>
+            </tr>
+            {% endfor %}
+            </table>
+          {% endif %}
+          <a href="{% url 'project_add' %}">add new projects</a>
+          <div>
+          <h5>-Link to visit</h5>
+          </div>
+          <div class="col-md-2">
+          Students :</div>
+          <div class="col-md-8">
+            <a href="">Link1</a>,<a href="">Link2</a>,<a href="">Link3</a>
+          </div>
+          <div class="row"></div>
+           <div class="col-md-2">
+            General Public :</div>
+            <div class="col-md-8"><a href="">Link1</a>,<a href="">Link2</a>,<a href="">Link3</a>
+            </div>
+            </div>
+      </div>
+    </div>
+</div>
+{% endblock %}
